@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-tailwind = {extras = ["reload", "cookiecutter", "honcho"], version = "*"}
+mysqlclient = "*"
 
 [dev-packages]
 

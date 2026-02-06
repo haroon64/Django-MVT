@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'theme',
+    "tailwind",
     'core',
+    'item',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,7 +52,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
+
 ]
+TAILWIND_APP_NAME = "theme"
 
 ROOT_URLCONF = 'store_shop.urls'
 
@@ -75,10 +82,14 @@ WSGI_APPLICATION = 'store_shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'storeshop',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'mysql6464'
     }
 }
+
 
 
 # Password validation
@@ -99,7 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+if DEBUG:
+    # Add django_browser_reload only in DEBUG mode
+    INSTALLED_APPS += ["django_browser_reload"]
+if DEBUG:
+    # Add django_browser_reload middleware only in DEBUG mode
+    MIDDLEWARE += [
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
